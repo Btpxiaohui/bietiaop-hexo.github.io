@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登陆</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css" integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_2374172_4ikzx8oz9xv.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/login.css">
+
+</head>
+
+<body>
+    <div class="backtoHome" onclick="backtoHome();"><i class="iconfont icon-backword-line"></i>回到首页</div>
+    <div class="loginBox">
+        <div class="title">登陆</div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label" for="email">邮箱</label>
+            <input class="mdui-textfield-input" type="email" name="email" id="email" placeholder="请输入邮箱">
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label" for="password">密码</label>
+            <input class="mdui-textfield-input" type="password" name="password" id="password" placeholder="请输入密码">
+        </div>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent" onclick="login();">登陆</button>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="gotoRegister();">注册</button>
+        <a onclick="tip('忘记密码请联系网站管理员，安全起见，暂时不提供网页申诉。');">忘记密码？</a>
+    </div>
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="./js/cloudbase-js-sdk/cloudbase.full.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
+    <script src="./js/common.js"></script>
+    <script>
+        if (auth.hasLoginState()) {
+            pop("你已登陆");
+            window.location = "/";
+        } else {
+            function login() {
+                pop("正在处理，请稍候")
+                auth
+                    .signInWithEmailAndPassword($("#email").val(), $("#password").val())
+                    .then((loginState) => {
+                        pop("登陆成功");
+                        window.location = "/";
+                    })
+                    .catch((result) => {
+                        var obj = JSON.parse(result.message)
+                        tip(obj.msg)
+
+                    })
+            }
+        }
+
+        function gotoRegister() {
+            window.location = '/register.html';
+        }
+
+        function backtoHome() {
+            window.location = '/';
+        }
+    </script>
+</body>
+
+</html>
