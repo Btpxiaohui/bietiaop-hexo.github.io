@@ -1,0 +1,76 @@
+@charset 'utf-8';
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Noto+Sans+SC&display=swap');
+* {
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans SC";
+}
+
+.tip-container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.tip-box {
+    width: 400px;
+    background: rgb(255, 255, 255);
+    padding: 20px 40px;
+    border-radius: 10px;
+    cursor: auto;
+    transition: 0.3s;
+}
+
+.tip-title {
+    padding: 3px 0px;
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+.tip-content {
+    margin: 10px 0px;
+}
+
+.tip-menus {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.close-tip {
+    padding: 10px 30px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-tip:hover {
+    background: rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
+}
+
+.popbox {
+    padding: 8px 15px;
+    background: rgb(41, 41, 41);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: 0.3s;
+}
