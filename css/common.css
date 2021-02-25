@@ -16,7 +16,7 @@
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.6);
-    cursor: pointer;
+    cursor: default;
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
