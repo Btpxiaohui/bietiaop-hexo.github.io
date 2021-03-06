@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>打印一言·Hitokoto</title>
+
+    <link rel="stylesheet" href="./css/common.css">
+    <style>
+    	html,body{
+		    background-color: #efefef;
+		}
+		.xh-card{
+			position: relative;
+			padding: 15px;
+			background-color: #fff;
+			margin-bottom: 10px;
+		}
+		.xh-card::before{
+		    content: "";
+		    position: absolute;
+		    left: 0;
+		    top: -2px;
+		    width: 30px;
+		    height: 30px;
+		    border-left: 4px solid;
+		    border-top: 4px solid;
+		    
+		}
+		.xh-card::after{
+		    content: "";
+		    position: absolute;
+		    right: 0;
+		    bottom: -2px;
+		    width: 30px;
+		    height: 30px;
+		    border-right: 4px solid;
+		    border-bottom: 4px solid;
+		}
+		.xh-card::after,.xh-card::before{
+		    border-color: #525252;
+		}
+		.xh-card p:nth-child(1){
+			text-align: left;
+			font-weight: 900;
+			margin: 0;
+		}
+		.xh-card p:nth-child(2){
+			text-align: right;
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+    </style>
+</head>
+
+<body>
+
+        <div class="cards">
+        </div>
+
+
+
+
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="./js/cloudbase-js-sdk/cloudbase.full.js"></script>
+    <script src="./js/common.js"></script>
+    <script type="text/javascript">
+        var dbt = db.collection("likes");
+		function likeList() {
+		            if (isLogin) {
+		                dbt
+		                    .where({
+		                        uid: user.uid
+		                    })
+		                    .get()
+		                    .then((res) => {
+		                        let cthtml;
+		                        if (res.data.length == 0) {
+		                            cthtml = "<p style='color:black'>没有喜欢的哦，快去添加吧</p>";
+		                        }else{
+		                        for (let i = res.data.length-1;i > -1; i--) {
+		                            id = res.data[i].id;
+		                            type = res.data[i].type;
+		                            hitokoto = res.data[i].hitokoto;
+		                            author = res.data[i].author;
+		                            if (i == res.data.length-1) {
+		                                cthtml = '<div class="item" data-id="' + id + '" data-type="' + type + '"><p>'+ hitokoto +'</p><p>'+ author +'<p></div>';
+		                            } else {
+		                                cthtml += '<div class="item" data-id="' + id + '" data-type="' + type + '"><p>'+ hitokoto +'</p><p>'+ author +'<p></div>';
+		                            }
+		                        }   }
+		                        $(".likes").html(cthtml);
+		                    });
+		            } else {
+		                tip("请先登陆");
+		                $(".close-tip").click(function() {
+		                    window.location = "/login.html";
+		                })
+		            }
+		
+		        }
+		window.onload = likeList();
+    </script>
+</body>
+
+</html>
