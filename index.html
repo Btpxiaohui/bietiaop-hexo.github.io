@@ -265,7 +265,7 @@
                         let cthtml;
                         if (res.data.length == 0) {
                             cthtml = "<p style='color:white'>没有喜欢的哦，快去添加吧</p>";
-                        }
+                        }else{
                         for (let i = res.data.length-1;i < -1; i--) {
                             id = res.data[i].id;
                             type = res.data[i].type;
@@ -276,7 +276,7 @@
                             } else {
                                 cthtml += '<div class="item" data-id="' + id + '" data-type="' + type + '"><div id="hitokoto-' + id + '"><div class="hitokoto">' + hitokoto + '</div><div class="author">' + author + "</div></div>" + '<div class="dos"><a class="copylike" data-clipboard-target="#hitokoto-' + id + '">复制</a><a class="deletelike" data-id="' + id + '">删除</a></div></div>';
                             }
-                        }
+                        }   }
                         $(".likes").html(cthtml);
                         var clipboard2 = new ClipboardJS('.copylike');
                         clipboard2.on('success', function(e) {
