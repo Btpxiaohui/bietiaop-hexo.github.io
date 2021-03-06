@@ -267,10 +267,10 @@
                         }
                             for (i = 0; i < res.data.length; i++) {
                                 var n = res.data.length - i;
-                                id = res.data[i].id;
-                                type = res.data[i].type;
-                                hitokoto = res.data[i].hitokoto;
-                                author = res.data[i].author;
+                                id = res.data[n].id;
+                                type = res.data[n].type;
+                                hitokoto = res.data[n].hitokoto;
+                                author = res.data[n].author;
                                 if (i == 0) {
                                     html = '<div class="item" data-id="' + id + '" data-type="' + type + '"><div id="hitokoto-' + id + '"><div class="hitokoto">' + hitokoto + '</div><div class="author">' + author + "</div></div>" + '<div class="dos"><a class="copylike" data-clipboard-target="#hitokoto-' + id + '">复制</a><a class="deletelike" data-id="' + id + '">删除</a></div></div>';
                                 } else {
