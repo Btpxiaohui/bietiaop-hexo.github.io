@@ -258,11 +258,11 @@
             if (isLogin) {
                 dbt
                     .where({
-                        // gt 方法用于指定一个 "大于" 条件，此处 _.gt(30) 是一个 "大于 30" 的条件
                         uid: user.uid
                     })
                     .get()
                     .then((res) => {
+                        let cthtml;
                         if (res.data.length == 0) {
                             cthtml = "<p style='color:white'>没有喜欢的哦，快去添加吧</p>";
                         }
