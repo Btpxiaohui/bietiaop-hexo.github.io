@@ -265,18 +265,17 @@
                         if (res.data.length == 0) {
                             html = "<p style='color:white'>没有喜欢的哦，快去添加吧</p>";
                         }else{
-                            i = res.data.length;
-                            while (i > 0) {
-                                id = res.data[i].id;
-                                type = res.data[i].type;
-                                hitokoto = res.data[i].hitokoto;
-                                author = res.data[i].author;
-                                if (i == res.data.length) {
+                            while (i = 0; i < res.data.length; i++) {
+                                var num = res.data.length;
+                                id = res.data[num].id;
+                                type = res.data[num].type;
+                                hitokoto = res.data[num].hitokoto;
+                                author = res.data[num].author;
+                                if (i == 0) {
                                     html = '<div class="item" data-id="' + id + '" data-type="' + type + '"><div id="hitokoto-' + id + '"><div class="hitokoto">' + hitokoto + '</div><div class="author">' + author + "</div></div>" + '<div class="dos"><a class="copylike" data-clipboard-target="#hitokoto-' + id + '">复制</a><a class="deletelike" data-id="' + id + '">删除</a></div></div>';
                                 } else {
                                     html += '<div class="item" data-id="' + id + '" data-type="' + type + '"><div id="hitokoto-' + id + '"><div class="hitokoto">' + hitokoto + '</div><div class="author">' + author + "</div></div>" + '<div class="dos"><a class="copylike" data-clipboard-target="#hitokoto-' + id + '">复制</a><a class="deletelike" data-id="' + id + '">删除</a></div></div>';
                                 }
-                                i--;
                             }
                         }
                         $(".likes").html(html);
