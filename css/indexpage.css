@@ -155,7 +155,7 @@ html {
     flex-wrap: wrap;
     flex-flow: row wrap;
     align-content: flex-start;
-    overflow: hidden;
+    overflow: hidden !important;
     border-radius: 10px;
     transform: scale(0);
     top: -50px;
@@ -176,7 +176,7 @@ html {
 
 .listOpen {
     transform: scale(1);
-    top: -100px;
+    top: -105px;
 }
 
 #personallist {
@@ -185,7 +185,7 @@ html {
 
 .listOpen-p {
     transform: scale(1);
-    top: -140px !important;
+    top: -135px !important;
 }
 
 #personallist .listItem {
