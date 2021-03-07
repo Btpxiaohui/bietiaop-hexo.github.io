@@ -279,7 +279,7 @@ html {
 .print {
     position: fixed !important;
     right: 60px;
-    top: -100px;
+    top: -150px;
     background: rgb(255, 255, 255);
     z-index: 2;
     padding: 10px 20px;
