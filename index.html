@@ -73,7 +73,7 @@
                 <a class="listItem" id="username">用户名</a>
                 <a class="listItem" onclick="confirmLogout();">退出登录</a>
                 <a class="listItem" id="useruid">uid</a>
-                <a class="listItem" onclick="copyuid();" data-clipboard-target="#useruid">复制UID</a>
+                <a class="listItem" id="copyuid" data-clipboard-target="#useruid">复制UID</a>
             </div>
             <a class="item">
                 <div class="icon"><i class="iconfont icon-help"></i></div>
@@ -134,7 +134,6 @@
         }
         
         //copy uid
-        function copyuid(){
         	var clipboard = new ClipboardJS('#copyuid');
 	        clipboard.on('success', function(e) {
 	            pop("复制成功");
@@ -143,7 +142,6 @@
 	            console.error('Action:', e.action);
 	            console.error('Trigger:', e.trigger);
 	        });
-        }
         //openTheClass.Window
         function openclass() {
             $("#classlist").toggleClass("listOpen");
