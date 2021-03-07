@@ -176,7 +176,7 @@ html {
 
 .listOpen {
     transform: scale(1);
-    top: -110px;
+    top: -100px;
 }
 
 #personallist {
@@ -185,7 +185,7 @@ html {
 
 .listOpen-p {
     transform: scale(1);
-    top: -100px !important;
+    top: -140px !important;
 }
 
 #personallist .listItem {
@@ -206,7 +206,7 @@ html {
 }
 
 #useruid {
-	display:none;
+	display:none !important;
 }
 
 .likes {
