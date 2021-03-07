@@ -81,7 +81,7 @@
             </a>
         </div>
         <div class="close-likes" onclick="closelikes();">关闭</div>
-        <div class="toprint" onclick="toprint();">打印</div>
+        <div class="print" onclick="toprint();">打印</div>
         <div class="likes">
 
         </div>
@@ -309,7 +309,7 @@
                         });
                         $(".likes").addClass("likes_open");
                         $(".close-likes").addClass("close-likes-show");
-                        $(".toprint").addClass("toprint-show");
+                        $(".print").addClass("print-show");
                         $(".deletelike").click(function() {
                             dbt
                                 .where({
@@ -342,7 +342,7 @@
         function closelikes() {
             $(".likes").removeClass("likes_open");
             $(".close-likes").removeClass("close-likes-show");
-            $(".toprint").removeClass("toprint-show");
+            $(".print").removeClass("print-show");
         }
 
         function confirmLogout() {
