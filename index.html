@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>一言·Hitokoto</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css" integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw" crossorigin="anonymous" />
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/indexpage.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_2374172_4ikzx8oz9xv.css">
@@ -90,7 +90,8 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
     <script src="./js/clipboard.min.js"></script>
     <script src="./js/cloudbase-js-sdk/cloudbase.full.js"></script>
     <script src="./js/common.js"></script>
@@ -126,27 +127,29 @@
             $("#classlist").removeClass("listOpen");
         }
         if (isLogin) {
+            $("#personallist").removeClass("unlogin");
             $("#isloginstateresult").text("个人");
             $("#username").text(user.nickName);
             $("#useruid").text(user.uid);
         } else {
+            $("#personallist").addClass("unlogin");
             $("#isloginstateresult").text("未登录");
-            $("#personallist").html('<div class="listItem">未登录，<a href="./login.html">点击登录</a></div>')
+            $("#personallist").html('<div class="listItem">未登录，<a onclick="loginBox()">点击登录</a></div>')
         }
-        
+
         //copy uid
-        	var clipboard = new ClipboardJS('#copyuid');
-	        clipboard.on('success', function(e) {
-	            pop("复制成功");
-	        })
-	        clipboard.on('error', function(e) {
-	            console.error('Action:', e.action);
-	            console.error('Trigger:', e.trigger);
-	        });
-	
-		function toprint(){
-			window.location = "/print.html?a="+user.uid;
-		}
+        var clipboard = new ClipboardJS('#copyuid');
+        clipboard.on('success', function(e) {
+            pop("复制成功");
+        })
+        clipboard.on('error', function(e) {
+            console.error('Action:', e.action);
+            console.error('Trigger:', e.trigger);
+        });
+
+        function toprint() {
+            window.location = "/print.html?a=" + user.uid;
+        }
         //openTheClass.Window
         function openclass() {
             $("#classlist").toggleClass("listOpen");
@@ -261,9 +264,9 @@
                         }
                     });
             } else {
-                tip("请先登陆");
-                $(".close-tip").click(function() {
-                    window.location = "/login.html";
+                confirm("未登录", "请先登陆");
+                $(".confirm-confirm").click(function() {
+                    loginBox();
                 })
             }
 
@@ -282,18 +285,19 @@
                         let cthtml;
                         if (res.data.length == 0) {
                             cthtml = "<p style='color:white'>没有喜欢的哦，快去添加吧</p>";
-                        }else{
-                        for (let i = res.data.length-1;i > -1; i--) {
-                            id = res.data[i].id;
-                            type = res.data[i].type;
-                            hitokoto = res.data[i].hitokoto;
-                            author = res.data[i].author;
-                            if (i == res.data.length-1) {
-                                cthtml = '<div class="item" data-id="' + id + '" data-type="' + type + '"><div id="hitokoto-' + id + '"><div class="hitokoto">' + hitokoto + '</div><div class="author">' + author + "</div></div>" + '<div class="dos"><a class="copylike" data-clipboard-target="#hitokoto-' + id + '">复制</a><a class="deletelike" data-id="' + id + '">删除</a></div></div>';
-                            } else {
-                                cthtml += '<div class="item" data-id="' + id + '" data-type="' + type + '"><div id="hitokoto-' + id + '"><div class="hitokoto">' + hitokoto + '</div><div class="author">' + author + "</div></div>" + '<div class="dos"><a class="copylike" data-clipboard-target="#hitokoto-' + id + '">复制</a><a class="deletelike" data-id="' + id + '">删除</a></div></div>';
+                        } else {
+                            for (let i = res.data.length - 1; i > -1; i--) {
+                                id = res.data[i].id;
+                                type = res.data[i].type;
+                                hitokoto = res.data[i].hitokoto;
+                                author = res.data[i].author;
+                                if (i == res.data.length - 1) {
+                                    cthtml = '<div class="item" data-id="' + id + '" data-type="' + type + '"><div id="hitokoto-' + id + '"><div class="hitokoto">' + hitokoto + '</div><div class="author">' + author + "</div></div>" + '<div class="dos"><a class="copylike" data-clipboard-target="#hitokoto-' + id + '">复制</a><a class="deletelike" data-id="' + id + '">删除</a></div></div>';
+                                } else {
+                                    cthtml += '<div class="item" data-id="' + id + '" data-type="' + type + '"><div id="hitokoto-' + id + '"><div class="hitokoto">' + hitokoto + '</div><div class="author">' + author + "</div></div>" + '<div class="dos"><a class="copylike" data-clipboard-target="#hitokoto-' + id + '">复制</a><a class="deletelike" data-id="' + id + '">删除</a></div></div>';
+                                }
                             }
-                        }   }
+                        }
                         $(".likes").html(cthtml);
                         var clipboard2 = new ClipboardJS('.copylike');
                         clipboard2.on('success', function(e) {
@@ -331,9 +335,9 @@
                         })
                     });
             } else {
-                tip("请先登陆");
-                $(".close-tip").click(function() {
-                    window.location = "/login.html";
+                confirm("未登录", "请先登陆");
+                $(".confirm-confirm").click(function() {
+                    loginBox();
                 })
             }
 
@@ -346,8 +350,8 @@
         }
 
         function confirmLogout() {
-            tip("确定要退出登录吗？")
-            $(".close-tip").click(function() {
+            confirm("退出登录", "确定要退出登录吗？")
+            $(".confirm-confirm").click(function() {
                 logout();
             })
         }
