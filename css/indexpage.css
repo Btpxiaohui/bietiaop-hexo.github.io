@@ -318,6 +318,11 @@ html {
     .tools {
         width: 90vw;
     }
+    body,
+    html {
+        background: url("../img/v2-2d3fa57b942089c216f5d2363d83b7ef.jpg") center center no-repeat fixed;
+        background-size: cover;
+    }
 }
 
 @media screen and (max-width:300px) {
